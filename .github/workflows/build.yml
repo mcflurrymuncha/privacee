@@ -1,4 +1,4 @@
-name: build and upload privacee artifacts
+name: build and upload privacee windows artifacts
 
 on:
   push:
@@ -8,11 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: windows-latest
 
     steps:
       - name: check out repository
@@ -30,17 +26,14 @@ jobs:
         run: npm run build
 
       - name: package app binaries
-        run: npx electron-builder --publish never
+        run: npx electron-builder --windows --publish never
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: upload production build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: privacee-${{ matrix.os }}-build
-          path: |
-            out/*.exe
-            out/*.dmg
-            out/*.deb
+          name: privacee-windows-build
+          path: out/*.exe
           if-no-files-found: error
           retention-days: 14
