@@ -9,7 +9,7 @@
     "pack": "tsc && electron-builder --dir",
     "dist": "tsc && electron-builder"
   },
-  "author": "vexi",
+  "author": "valorie",
   "license": "mit",
   "devDependencies": {
     "@types/node": "^20.14.0",
@@ -18,8 +18,8 @@
     "typescript": "^5.4.5"
   },
   "build": {
-    "appid": "com.privacee.browser",
-    "productname": "privacee",
+    "appId": "com.privacee.browser",
+    "productName": "privacee",
     "files": [
       "dist/**/*",
       "index.html",
@@ -32,24 +32,12 @@
       "target": [
         "nsis"
       ],
-      "requestedexecutionlevel": "asinvoker"
+      "requestedExecutionLevel": "asInvoker"
     },
     "nsis": {
-      "oneclick": true,
-      "permachine": false,
-      "allowtouremoveinstalldirectory": true
-    },
-    "mac": {
-      "target": [
-        "dmg"
-      ],
-      "category": "public.app-category.utilities"
-    },
-    "linux": {
-      "target": [
-        "deb"
-      ],
-      "category": "utility"
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }
