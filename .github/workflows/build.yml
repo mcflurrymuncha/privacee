@@ -1,12 +1,13 @@
-name: build and release
+name: build and upload privacee artifacts
 
 on:
   push:
+    branches: [main]
     tags:
       - 'v*'
 
 jobs:
-  release:
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -29,7 +30,20 @@ jobs:
       - name: compile typescript
         run: npm run build
 
+      # build local directory binaries using electron-builder
       - name: package app binaries
         run: npx electron-builder --publish never
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # upload the generated installer assets to the actions summary panel
+      - name: upload production build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: privacee-${{ matrix.os }}-build
+          path: |
+            out/*.exe
+            out/*.dmg
+            out/*.deb
+          if-no-files-found: error
+          retention-days: 14
