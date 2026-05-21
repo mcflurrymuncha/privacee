@@ -1,0 +1,35 @@
+name: build and release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v4
+
+      - name: set up node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: compile typescript
+        run: npm run build
+
+      - name: package app binaries
+        run: npx electron-builder --publish never
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
