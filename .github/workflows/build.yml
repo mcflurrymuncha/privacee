@@ -18,13 +18,11 @@ jobs:
       - name: check out repository
         uses: actions/checkout@v4
 
-      # we remove the automatic lockfile cache lookup here to prevent missing file errors
       - name: set up node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # changed npm ci to npm install to remove lockfile enforcement
       - name: install dependencies
         run: npm install
 
@@ -36,13 +34,13 @@ jobs:
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      type: upload production build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: privacee-${{ matrix.os }}-build
-        path: |
-          out/*.exe
-          out/*.dmg
-          out/*.deb
-        if-no-files-found: error
-        retention-days: 14
+      - name: upload production build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: privacee-${{ matrix.os }}-build
+          path: |
+            out/*.exe
+            out/*.dmg
+            out/*.deb
+          if-no-files-found: error
+          retention-days: 14
