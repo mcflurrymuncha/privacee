@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>privacee - new tab</title>
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; display: flex; flex-direction: column; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #1e1e24; color: #f4f4f6; overflow: hidden; }
+    #nav-bar { display: flex; background: #18181c; padding: 6px; gap: 8px; align-items: center; border-bottom: 1px solid #2a2a32; }
+    #tab-container { display: flex; background: #121214; padding: 4px 8px 0 8px; gap: 4px; overflow-x: auto; }
+    .tab { background: #222226; padding: 6px 16px; border-radius: 6px 6px 0 0; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 8px; border: 1px solid #2a2a32; border-bottom: none; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tab.active { background: #18181c; border-color: #3a3a45; font-weight: bold; color: #00ffaa; }
+    .close-tab { cursor: pointer; font-weight: bold; color: #888; }
+    .close-tab:hover { color: #ff5555; }
+    #new-tab-btn { background: #2a2a32; border: none; color: #fff; padding: 0 10px; height: 26px; border-radius: 4px; cursor: pointer; align-self: center; margin-left: 4px; }
+    #new-tab-btn:hover { background: #3a3a45; }
+    button { background: #2a2a32; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; font-size: 14px; }
+    button:hover { background: #3a3a45; }
+    #url-bar { flex-grow: 1; padding: 6px 12px; border-radius: 4px; border: 1px solid #2a2a32; background: #222226; color: white; outline: none; font-size: 14px; }
+    #url-bar:focus { border-color: #00ffaa; }
+    #view-container { flex-grow: 1; position: relative; background: #fff; }
+    webview { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
+    webview.active { display: flex; }
+  </style>
+</head>
+<body>
+
+  <div id="tab-container">
+    <button id="new-tab-btn">+</button>
+  </div>
+
+  <div id="nav-bar">
+    <button id="back-btn">back</button>
+    <button id="forward-btn">forward</button>
+    <button id="reload-btn">refresh</button>
+    <input type="text" id="url-bar" value="" placeholder="search duckduckgo or input url..." />
+    <button id="go-btn">go</button>
+  </div>
+
+  <div id="view-container"></div>
+
+  <script src="./dist/renderer.js"></script>
+</body>
+</html>
