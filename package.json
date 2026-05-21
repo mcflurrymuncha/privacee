@@ -9,13 +9,11 @@
     "pack": "tsc && electron-builder --dir",
     "dist": "tsc && electron-builder"
   },
-  "author": "your name",
+  "author": "vexi",
   "license": "mit",
-  "dependencies": {
-    "electron": "^42.2.0"
-  },
   "devDependencies": {
     "@types/node": "^20.14.0",
+    "electron": "^42.2.0",
     "electron-builder": "^24.13.3",
     "typescript": "^5.4.5"
   },
